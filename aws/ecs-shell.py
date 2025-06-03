@@ -282,6 +282,10 @@ def execute_interactive_command(
     
     try:
         subprocess.run(aws_cmd, check=True)
+    except KeyboardInterrupt:
+        print("\nCommand interrupted with CTRL+C. The shell session has been terminated.")
+        print("You can run the script again to start a new session.")
+        return
     except subprocess.CalledProcessError as e:
         print(f"Failed to execute command: {e}")
         if e.stderr:
